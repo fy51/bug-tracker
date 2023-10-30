@@ -1,3 +1,4 @@
+import Pagination from "@/components/Pagination";
 import prisma from "@/lib/db";
 import { Status } from "@prisma/client";
 import { Button, Flex } from "@radix-ui/themes";
@@ -17,7 +18,7 @@ const BugsPage = async ({
   });
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" gap="3">
       <Flex justify="between">
         <BugFilter searchParams={searchParams} />
         <Button>
@@ -25,7 +26,7 @@ const BugsPage = async ({
         </Button>
       </Flex>
       <BugTable bugs={bugs} />
-      <div>Pagination</div>
+      <Pagination currentPage={1} pageSize={2} totalCount={10} />
     </Flex>
   );
 };

@@ -4,7 +4,7 @@ import { Table } from "@radix-ui/themes";
 
 const BugTable = ({ bugs }: { bugs: Bug[] }) => {
   return (
-    <Table.Root>
+    <Table.Root variant="surface">
       <Table.Header>
         <Table.Row>
           <Table.ColumnHeaderCell>Bug</Table.ColumnHeaderCell>
