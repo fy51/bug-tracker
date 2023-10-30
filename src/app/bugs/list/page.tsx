@@ -4,14 +4,11 @@ import { Status } from "@prisma/client";
 import { Button, Flex } from "@radix-ui/themes";
 import Link from "next/link";
 import BugFilter from "./BugFilter";
-import BugTable from "./BugTable";
+import BugQuery from "./BugQuery";
+import BugTable, { columnNames } from "./BugTable";
 
-const BugsPage = async ({
-  searchParams,
-}: {
-  searchParams: { status: Status; page: number };
-}) => {
-  const currentPage = searchParams.page || 1;
+const BugsPage = async ({ searchParams }: { searchParams: BugQuery }) => {
+  const currentPage = parseInt(searchParams.page) || 1;
   const pageSize = 2;
 
   const statuses = Object.values(Status);
@@ -19,10 +16,15 @@ const BugsPage = async ({
     ? { status: searchParams.status }
     : undefined;
 
+  const orderBy = columnNames.includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: "asc" }
+    : undefined;
+
   const bugs = await prisma.bug.findMany({
     where,
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
+    orderBy,
   });
 
   const totalCount = await prisma.bug.count({
@@ -37,7 +39,7 @@ const BugsPage = async ({
           <Link href="/bugs/new">New Bug</Link>
         </Button>
       </Flex>
-      <BugTable bugs={bugs} />
+      <BugTable searchParams={searchParams} bugs={bugs} />
       <Pagination
         currentPage={currentPage}
         pageSize={pageSize}

@@ -3,6 +3,7 @@
 import { Status } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
+import BugQuery from "./BugQuery";
 
 const items: { label: string; value: Status }[] = [
   { label: "Open", value: "OPEN" },
@@ -10,7 +11,7 @@ const items: { label: string; value: Status }[] = [
   { label: "Closed", value: "CLOSED" },
 ];
 
-const BugFilter = ({ searchParams }: { searchParams: { status: Status } }) => {
+const BugFilter = ({ searchParams }: { searchParams: BugQuery }) => {
   const router = useRouter();
 
   const handleStatusChange = (status: string) => {

@@ -1,15 +1,46 @@
 import StatusBadge from "@/components/StatusBadge";
 import { Bug } from "@prisma/client";
+import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { Table } from "@radix-ui/themes";
+import Link from "next/link";
+import BugQuery from "./BugQuery";
 
-const BugTable = ({ bugs }: { bugs: Bug[] }) => {
+type Props = {
+  bugs: Bug[];
+  searchParams: BugQuery;
+};
+
+const columns: {
+  label: string;
+  value: keyof Bug;
+}[] = [
+  { label: "Bug", value: "title" },
+  { label: "Status", value: "status" },
+  { label: "Created", value: "createdAt" },
+];
+
+const BugTable = ({ bugs, searchParams }: Props) => {
   return (
     <Table.Root variant="surface">
       <Table.Header>
         <Table.Row>
-          <Table.ColumnHeaderCell>Bug</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell>Created</Table.ColumnHeaderCell>
+          {columns.map(({ label, value }) => (
+            <Table.ColumnHeaderCell key={label}>
+              <Link
+                href={{
+                  query: {
+                    ...searchParams,
+                    orderBy: value,
+                  },
+                }}
+              >
+                {label}
+              </Link>
+              {value === searchParams.orderBy && (
+                <ArrowUpIcon className="inline" />
+              )}
+            </Table.ColumnHeaderCell>
+          ))}
         </Table.Row>
       </Table.Header>
 
@@ -27,5 +58,7 @@ const BugTable = ({ bugs }: { bugs: Bug[] }) => {
     </Table.Root>
   );
 };
+
+export const columnNames = columns.map((column) => column.value);
 
 export default BugTable;
