@@ -9,12 +9,24 @@ import BugTable from "./BugTable";
 const BugsPage = async ({
   searchParams,
 }: {
-  searchParams: { status: Status };
+  searchParams: { status: Status; page: number };
 }) => {
+  const currentPage = searchParams.page || 1;
+  const pageSize = 2;
+
+  const statuses = Object.values(Status);
+  const where = statuses.includes(searchParams.status)
+    ? { status: searchParams.status }
+    : undefined;
+
   const bugs = await prisma.bug.findMany({
-    where: {
-      status: searchParams.status,
-    },
+    where,
+    skip: (currentPage - 1) * pageSize,
+    take: pageSize,
+  });
+
+  const totalCount = await prisma.bug.count({
+    where,
   });
 
   return (
@@ -26,7 +38,11 @@ const BugsPage = async ({
         </Button>
       </Flex>
       <BugTable bugs={bugs} />
-      <Pagination currentPage={1} pageSize={2} totalCount={10} />
+      <Pagination
+        currentPage={currentPage}
+        pageSize={pageSize}
+        totalCount={totalCount}
+      />
     </Flex>
   );
 };

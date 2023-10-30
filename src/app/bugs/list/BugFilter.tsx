@@ -20,6 +20,7 @@ const BugFilter = ({ searchParams }: { searchParams: { status: Status } }) => {
     } else {
       newParams.set("status", status);
     }
+    newParams.set("page", "1");
     router.push(`?${newParams.toString()}`);
   };
 
