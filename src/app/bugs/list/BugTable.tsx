@@ -13,11 +13,6 @@ const BugTable = ({ bugs }: { bugs: Bug[] }) => {
       </Table.Header>
 
       <Table.Body>
-        <Table.Row>
-          <Table.RowHeaderCell>Danilo Sousa</Table.RowHeaderCell>
-          <Table.Cell>danilo@example.com</Table.Cell>
-          <Table.Cell>Developer</Table.Cell>
-        </Table.Row>
         {bugs.map((bug) => (
           <Table.Row key={bug.id}>
             <Table.Cell>{bug.title}</Table.Cell>

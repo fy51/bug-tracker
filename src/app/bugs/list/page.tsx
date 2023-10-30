@@ -1,16 +1,21 @@
 import prisma from "@/lib/db";
+import { Status } from "@prisma/client";
 import { Button, Flex } from "@radix-ui/themes";
 import Link from "next/link";
+import BugFilter from "./BugFilter";
 import BugTable from "./BugTable";
 
-const BugsPage = async () => {
+const BugsPage = async ({
+  searchParams,
+}: {
+  searchParams: { status: Status };
+}) => {
   const bugs = await prisma.bug.findMany();
-  console.log(bugs);
 
   return (
     <Flex direction="column">
       <Flex justify="between">
-        <div>BugFilter</div>
+        <BugFilter searchParams={searchParams} />
         <Button>
           <Link href="/bugs/new">New Bug</Link>
         </Button>
@@ -20,5 +25,7 @@ const BugsPage = async () => {
     </Flex>
   );
 };
+
+// export const dynamic = "force-dynamic";
 
 export default BugsPage;
