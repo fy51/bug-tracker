@@ -1,3 +1,4 @@
+import StatusBadge from "@/components/StatusBadge";
 import { Bug } from "@prisma/client";
 import { Table } from "@radix-ui/themes";
 
@@ -13,11 +14,13 @@ const BugTable = ({ bugs }: { bugs: Bug[] }) => {
       </Table.Header>
 
       <Table.Body>
-        {bugs.map((bug) => (
-          <Table.Row key={bug.id}>
-            <Table.Cell>{bug.title}</Table.Cell>
-            <Table.Cell>{bug.status}</Table.Cell>
-            <Table.Cell>{bug.createdAt.toDateString()}</Table.Cell>
+        {bugs.map(({ id, title, status, createdAt }) => (
+          <Table.Row key={id}>
+            <Table.Cell>{title}</Table.Cell>
+            <Table.Cell>
+              <StatusBadge status={status} />
+            </Table.Cell>
+            <Table.Cell>{createdAt.toDateString()}</Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

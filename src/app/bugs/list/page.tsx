@@ -10,7 +10,11 @@ const BugsPage = async ({
 }: {
   searchParams: { status: Status };
 }) => {
-  const bugs = await prisma.bug.findMany();
+  const bugs = await prisma.bug.findMany({
+    where: {
+      status: searchParams.status,
+    },
+  });
 
   return (
     <Flex direction="column">
