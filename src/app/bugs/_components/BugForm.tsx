@@ -1,6 +1,7 @@
 "use client";
 
 import ErrorMessage from "@/components/ErrorMessage";
+import Spinner from "@/components/Spinner";
 import { bugSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Callout, Flex, TextField } from "@radix-ui/themes";
@@ -61,7 +62,10 @@ const BugForm = () => {
           )}
         />
         {<ErrorMessage>{errors.description?.message}</ErrorMessage>}
-        <Button disabled={isSubmitting}>Save Bug</Button>
+        <Button disabled={isSubmitting}>
+          Save Bug
+          {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </Flex>
   );
