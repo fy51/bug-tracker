@@ -9,7 +9,7 @@ import BugTable, { columnNames } from "./BugTable";
 
 const BugsPage = async ({ searchParams }: { searchParams: BugQuery }) => {
   const currentPage = parseInt(searchParams.page) || 1;
-  const pageSize = 2;
+  const pageSize = 10;
 
   const statuses = Object.values(Status);
   const where = statuses.includes(searchParams.status)
