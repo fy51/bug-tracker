@@ -1,7 +1,8 @@
 import prisma from "@/lib/db";
-import { Box, Button, Flex, Grid } from "@radix-ui/themes";
+import { Box, Flex, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import BugDetails from "./BugDetails";
+import DeleteBugButton from "./DeleteBugButton";
 import EditBugButton from "./EditBugButton";
 
 const BugDetailPage = async ({ params }: { params: { id: string } }) => {
@@ -20,7 +21,7 @@ const BugDetailPage = async ({ params }: { params: { id: string } }) => {
         <Flex direction="column" gap="3">
           <div>AssigneeSelect</div>
           <EditBugButton bugId={bug.id} />
-          <Button>Delete Bug</Button>
+          <DeleteBugButton bugId={bug.id} />
         </Flex>
       </Box>
     </Grid>
