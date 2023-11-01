@@ -4,6 +4,7 @@ import ErrorMessage from "@/components/ErrorMessage";
 import Spinner from "@/components/Spinner";
 import { bugSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Bug } from "@prisma/client";
 import { Button, Callout, Flex, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
@@ -15,7 +16,7 @@ import { z } from "zod";
 
 type BugFormData = z.infer<typeof bugSchema>;
 
-const BugForm = () => {
+const BugForm = ({ bug }: { bug?: Bug }) => {
   const router = useRouter();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
