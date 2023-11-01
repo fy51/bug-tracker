@@ -1,8 +1,8 @@
 import prisma from "@/lib/db";
 import { Box, Button, Flex, Grid } from "@radix-ui/themes";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import BugDetails from "./BugDetails";
+import EditBugButton from "./EditBugButton";
 
 const BugDetailPage = async ({ params }: { params: { id: string } }) => {
   const bug = await prisma.bug.findUnique({
@@ -19,9 +19,7 @@ const BugDetailPage = async ({ params }: { params: { id: string } }) => {
       <Box>
         <Flex direction="column" gap="3">
           <div>AssigneeSelect</div>
-          <Button>
-            <Link href={`/bugs/edit/${params.id}`}>Edit Bug</Link>
-          </Button>
+          <EditBugButton bugId={bug.id} />
           <Button>Delete Bug</Button>
         </Flex>
       </Box>
