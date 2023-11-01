@@ -47,7 +47,9 @@ const BugTable = ({ bugs, searchParams }: Props) => {
       <Table.Body>
         {bugs.map(({ id, title, status, createdAt }) => (
           <Table.Row key={id}>
-            <Table.Cell>{title}</Table.Cell>
+            <Table.Cell>
+              <Link href={`/bugs/detail/${id}`}>{title}</Link>
+            </Table.Cell>
             <Table.Cell>
               <StatusBadge status={status} />
             </Table.Cell>
