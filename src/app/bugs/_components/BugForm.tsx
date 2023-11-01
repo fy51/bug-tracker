@@ -34,7 +34,11 @@ const BugForm = ({ bug }: { bug?: Bug }) => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true);
-      await axios.post("/api/bugs", data);
+      if (bug) {
+        await axios.patch(`/api/bugs/{$bug.id}`, data);
+      } else {
+        await axios.post("/api/bugs", data);
+      }
       router.push("/bugs/list");
       router.refresh();
     } catch (error) {
@@ -52,19 +56,24 @@ const BugForm = ({ bug }: { bug?: Bug }) => {
       )}
       <form className="space-y-3" onSubmit={onSubmit}>
         <TextField.Root>
-          <TextField.Input placeholder="Title" {...register("title")} />
+          <TextField.Input
+            placeholder="Title"
+            defaultValue={bug?.title}
+            {...register("title")}
+          />
         </TextField.Root>
         {<ErrorMessage>{errors.title?.message}</ErrorMessage>}
         <Controller
           name="description"
           control={control}
+          defaultValue={bug?.description}
           render={({ field }) => (
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
         {<ErrorMessage>{errors.description?.message}</ErrorMessage>}
         <Button disabled={isSubmitting}>
-          Save Bug
+          {bug ? "Save Bug" : "Create New Bug"}
           {isSubmitting && <Spinner />}
         </Button>
       </form>
