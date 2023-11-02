@@ -22,7 +22,7 @@ export async function PATCH(
   }
 
   // 3. Update data
-  const { title, description } = validation.data;
+  const { title, description, userId } = validation.data;
   const updatedBug = await prisma.bug.update({
     where: {
       id: bug.id,
@@ -30,6 +30,7 @@ export async function PATCH(
     data: {
       title,
       description,
+      userId,
     },
   });
   return NextResponse.json(updatedBug);

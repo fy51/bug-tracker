@@ -12,4 +12,10 @@ export const patchBugSchema = z.object({
     .min(1, "Description is required.")
     .max(255)
     .optional(),
+  userId: z
+    .string()
+    .min(1, "userId is required")
+    .max(255)
+    .optional()
+    .nullable(),
 });
