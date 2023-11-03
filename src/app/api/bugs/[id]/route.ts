@@ -1,11 +1,16 @@
+import authOptions from "@/lib/authOptions";
 import prisma from "@/lib/db";
 import { patchBugSchema } from "@/lib/validation";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({}, { status: 401 });
+
   // 1. Check request body
   const body: unknown = await request.json();
   const validation = patchBugSchema.safeParse(body);
@@ -40,6 +45,9 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({}, { status: 401 });
+
   const bug = await prisma.bug.findUnique({
     where: { id: parseInt(params.id) },
   });
