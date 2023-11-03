@@ -2,10 +2,16 @@ import Pagination from "@/components/Pagination";
 import prisma from "@/lib/db";
 import { Status } from "@prisma/client";
 import { Button, Flex } from "@radix-ui/themes";
+import { Metadata } from "next";
 import Link from "next/link";
 import BugFilter from "./BugFilter";
 import BugQuery from "./BugQuery";
 import BugTable, { columnNames } from "./BugTable";
+
+export const metadata: Metadata = {
+  title: "Bug Tracker - Bug list",
+  description: "View all project bugs",
+};
 
 const BugsPage = async ({ searchParams }: { searchParams: BugQuery }) => {
   const currentPage = parseInt(searchParams.page) || 1;

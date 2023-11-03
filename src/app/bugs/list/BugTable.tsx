@@ -16,8 +16,16 @@ const columns: {
   className?: string;
 }[] = [
   { label: "Bug", value: "title" },
-  { label: "Status", value: "status", className: "hidden md:tabel-cell" },
-  { label: "Created", value: "createdAt", className: "hidden md:tabel-cell" },
+  {
+    label: "Status",
+    value: "status",
+    className: "hidden md:table-cell",
+  },
+  {
+    label: "Created",
+    value: "createdAt",
+    className: "hidden md:table-cell",
+  },
 ];
 
 const BugTable = ({ bugs, searchParams }: Props) => {
