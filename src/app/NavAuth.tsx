@@ -1,5 +1,6 @@
 "use client";
 
+import Skeleton from "@/components/Skeleton";
 import { Avatar, DropdownMenu } from "@radix-ui/themes";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -7,9 +8,7 @@ import Link from "next/link";
 const NavAuth = () => {
   const { status, data: session } = useSession();
 
-  if (status === "loading") {
-    // Todo: Show skeleton
-  }
+  if (status === "loading") <Skeleton width="3rem" />;
 
   if (status === "unauthenticated") {
     return (

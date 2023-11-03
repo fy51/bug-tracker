@@ -1,5 +1,6 @@
 "use client";
 
+import Skeleton from "@/components/Skeleton";
 import { Bug, User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
@@ -18,9 +19,7 @@ const AssigneeSelect = ({ bug }: { bug: Bug }) => {
     retry: 3,
   });
 
-  if (isLoading) {
-    // Todo: skeleton
-  }
+  if (isLoading) <Skeleton />;
 
   if (error) return null;
 
