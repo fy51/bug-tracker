@@ -55,6 +55,6 @@ const BugsPage = async ({ searchParams }: { searchParams: BugQuery }) => {
   );
 };
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 export default BugsPage;
