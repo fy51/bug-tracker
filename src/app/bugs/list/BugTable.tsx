@@ -1,4 +1,4 @@
-import StatusBadge from "@/components/StatusBadge";
+import { StatusBadge } from "@/components";
 import { Bug } from "@prisma/client";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { Table } from "@radix-ui/themes";

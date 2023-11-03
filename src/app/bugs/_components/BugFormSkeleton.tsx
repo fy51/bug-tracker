@@ -1,4 +1,4 @@
-import Skeleton from "@/components/Skeleton";
+import { Skeleton } from "@/components";
 import { Box } from "@radix-ui/themes";
 
 const BugFormSkeleton = () => {

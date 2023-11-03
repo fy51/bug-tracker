@@ -1,4 +1,4 @@
-import StatusBadge from "@/components/StatusBadge";
+import { StatusBadge } from "@/components";
 import { Bug } from "@prisma/client";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import ReactMarkDown from "react-markdown";

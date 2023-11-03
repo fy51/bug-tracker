@@ -1,4 +1,4 @@
-import Pagination from "@/components/Pagination";
+import { Pagination } from "@/components";
 import prisma from "@/lib/db";
 import { Status } from "@prisma/client";
 import { Button, Flex } from "@radix-ui/themes";

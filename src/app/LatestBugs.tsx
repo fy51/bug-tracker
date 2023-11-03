@@ -1,4 +1,4 @@
-import StatusBadge from "@/components/StatusBadge";
+import { StatusBadge } from "@/components";
 import prisma from "@/lib/db";
 import { Avatar, Card, Flex, Heading, Table } from "@radix-ui/themes";
 import Link from "next/link";

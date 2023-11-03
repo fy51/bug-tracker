@@ -1,7 +1,6 @@
 "use client";
 
-import ErrorMessage from "@/components/ErrorMessage";
-import Spinner from "@/components/Spinner";
+import { ErrorMessage, Spinner } from "@/components";
 import { bugSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Bug } from "@prisma/client";
