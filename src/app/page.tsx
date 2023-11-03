@@ -1,5 +1,6 @@
 import prisma from "@/lib/db";
 import { Grid } from "@radix-ui/themes";
+import LatestBugs from "./LatestBugs";
 
 export default async function Home() {
   const open = await prisma.bug.count({ where: { status: "OPEN" } });
@@ -14,7 +15,7 @@ export default async function Home() {
         <div>BugSummary</div>
         <div>BubChart</div>
       </div>
-      <div>LatestBugs</div>
+      <LatestBugs />
     </Grid>
   );
 }
