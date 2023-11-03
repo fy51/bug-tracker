@@ -1,5 +1,6 @@
 import prisma from "@/lib/db";
-import { Grid } from "@radix-ui/themes";
+import { Flex, Grid } from "@radix-ui/themes";
+import BugChart from "./BugChart";
 import BugSummary from "./BugSummary";
 import LatestBugs from "./LatestBugs";
 
@@ -11,11 +12,11 @@ export default async function Home() {
   const closed = await prisma.bug.count({ where: { status: "CLOSED" } });
 
   return (
-    <Grid columns="2">
-      <div>
+    <Grid columns="2" gap="5">
+      <Flex direction="column" gap="5">
         <BugSummary open={open} inProgress={inProgress} closed={closed} />
-        <div>BubChart</div>
-      </div>
+        <BugChart open={open} inProgress={inProgress} closed={closed} />
+      </Flex>
       <LatestBugs />
     </Grid>
   );
