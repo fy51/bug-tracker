@@ -1,5 +1,6 @@
 import prisma from "@/lib/db";
 import { Grid } from "@radix-ui/themes";
+import BugSummary from "./BugSummary";
 import LatestBugs from "./LatestBugs";
 
 export default async function Home() {
@@ -12,7 +13,7 @@ export default async function Home() {
   return (
     <Grid columns="2">
       <div>
-        <div>BugSummary</div>
+        <BugSummary open={open} inProgress={inProgress} closed={closed} />
         <div>BubChart</div>
       </div>
       <LatestBugs />
