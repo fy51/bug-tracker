@@ -1,6 +1,11 @@
 import prisma from "@/lib/db";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
-import BugForm from "../../_components/BugForm";
+
+const BugForm = dynamic(() => import("@/app/bugs/_components/BugForm"), {
+  ssr: false,
+  loading: () => <></>,
+});
 
 const EditBugPage = async ({ params }: { params: { id: string } }) => {
   const bug = await prisma.bug.findUnique({
