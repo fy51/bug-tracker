@@ -12,7 +12,7 @@ export default async function Home() {
   const closed = await prisma.bug.count({ where: { status: "CLOSED" } });
 
   return (
-    <Grid columns="2" gap="5">
+    <Grid columns={{ initial: "1", sm: "2" }} gap="5">
       <Flex direction="column" gap="5">
         <BugSummary open={open} inProgress={inProgress} closed={closed} />
         <BugChart open={open} inProgress={inProgress} closed={closed} />

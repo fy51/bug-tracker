@@ -14,7 +14,7 @@ const BugDetailPage = async ({ params }: { params: { id: string } }) => {
   if (!bug) notFound();
 
   return (
-    <Grid columns="5" gap="5">
+    <Grid columns={{ initial: "1", sm: "5" }} gap="5">
       <Box className="col-span-4">
         <BugDetails bug={bug} />
       </Box>

@@ -13,10 +13,11 @@ type Props = {
 const columns: {
   label: string;
   value: keyof Bug;
+  className?: string;
 }[] = [
   { label: "Bug", value: "title" },
-  { label: "Status", value: "status" },
-  { label: "Created", value: "createdAt" },
+  { label: "Status", value: "status", className: "hidden md:tabel-cell" },
+  { label: "Created", value: "createdAt", className: "hidden md:tabel-cell" },
 ];
 
 const BugTable = ({ bugs, searchParams }: Props) => {
@@ -24,8 +25,8 @@ const BugTable = ({ bugs, searchParams }: Props) => {
     <Table.Root variant="surface">
       <Table.Header>
         <Table.Row>
-          {columns.map(({ label, value }) => (
-            <Table.ColumnHeaderCell key={label}>
+          {columns.map(({ label, value, className }) => (
+            <Table.ColumnHeaderCell key={label} className={className}>
               <Link
                 href={{
                   query: {
@@ -50,10 +51,12 @@ const BugTable = ({ bugs, searchParams }: Props) => {
             <Table.Cell>
               <Link href={`/bugs/detail/${id}`}>{title}</Link>
             </Table.Cell>
-            <Table.Cell>
+            <Table.Cell className="hidden md:table-cell">
               <StatusBadge status={status} />
             </Table.Cell>
-            <Table.Cell>{createdAt.toDateString()}</Table.Cell>
+            <Table.Cell className="hidden md:table-cell">
+              {createdAt.toDateString()}
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>
